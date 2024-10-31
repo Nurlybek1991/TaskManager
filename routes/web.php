@@ -34,6 +34,14 @@ Route::controller(BoardController::class)->group(function () {
     Route::delete('/board/deleteBoard/{id}', [BoardController::class, 'deleteBoard'])->name('deleteBoard');
 });
 
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/profile', [ProfileController::class, 'editProfile'])->name('editProfile');
+    Route::post('/profile/updateProfile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
+    Route::get('/upload', [ProfileController::class, 'uploadImage'])->name('uploadImage');
+    Route::post('/upload', [ProfileController::class, 'postUploadImage'])->name('postUploadImage');
+
+});
+
 Route::post('/task/createTask', [MainController::class, 'createTask'])->name('createTask');
 Route::get('/main', [MainController::class, 'userInfo'])->name('main');
 Route::post('/main', [MainController::class, 'storeBoards'])->name('storeBor');

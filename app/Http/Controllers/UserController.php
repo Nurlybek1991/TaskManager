@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function registration()
+    public function registration(): string
     {
         return view('registration');
     }
@@ -30,6 +30,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
+
         Auth::login($user);
 
         return redirect("login");
@@ -43,13 +44,13 @@ class UserController extends Controller
     public function checkLogin(Request $request): string
     {
 
-
         $credentials = $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
 
-        if (!Auth::attempt($credentials, $request->boolean('remember'))) {
+
+        if (!Auth::attempt($credentials)) {
             return back()
                 ->withInput()
                 ->withErrors([
